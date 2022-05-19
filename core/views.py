@@ -1,7 +1,9 @@
 from string import capwords
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Billing, Cargo, CargoTypes, Customer, Enquiry, Payments, Transaction
 
+def home(request):
+    return render(request,"home.html")
 def index(request):
 
     customer = Customer.objects.all().count()
@@ -26,7 +28,7 @@ def index(request):
         email = request.POST.get("email")
 
         if email == "admin@gmail.com" and password == "admin":
-            return render(request,"home.html",data)
+            return redirect("home/")
 
         else:
             render(request,'index.html')
